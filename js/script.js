@@ -103,33 +103,47 @@ const books = [
 
 // //  Stampa in console l’età media degli autori dei libri.
 // console.log(agesSum / 4);
-// * SNACK 5
-// Usando la l'API http://localhost:3333/books/{id}
-// usa la combinazione di .map() e Promise.all(),
-// per creare una funzione (getBooks) che a partire da un array di id
-// (ids), ritorna una promise che risolve un array di libri (books).
-//  Testala con l’array [2, 13, 7, 21, 19] .
-async function fetchJson(url) {
-  const response = await fetch(url);
-  const obj = await response.json();
-  return obj;
-}
-async function getBooks(ids) {
-  try {
-    const booksPromise = ids.map((id) => {
-      return fetchJson(`http://localhost:3333/books/${id}`);
-    });
-    const books = await Promise.all(booksPromise);
-    return books;
-  } catch (err) {
-    console.error(err);
-  }
-}
-(async () => {
-  try {
-    const res = await getBooks([2, 13, 7, 21, 19]);
-    console.log(res);
-  } catch (err) {
-    console.error(err);
-  }
-})();
+// // * SNACK 5
+// // Usando la l'API http://localhost:3333/books/{id}
+// // usa la combinazione di .map() e Promise.all(),
+// // per creare una funzione (getBooks) che a partire da un array di id
+// // (ids), ritorna una promise che risolve un array di libri (books).
+// //  Testala con l’array [2, 13, 7, 21, 19] .
+// async function fetchJson(url) {
+//   const response = await fetch(url);
+//   const obj = await response.json();
+//   return obj;
+// }
+// async function getBooks(ids) {
+//   try {
+//     const booksPromise = ids.map((id) => {
+//       return fetchJson(`http://localhost:3333/books/${id}`);
+//     });
+//     const books = await Promise.all(booksPromise);
+//     return books;
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
+// (async () => {
+//   try {
+//     const res = await getBooks([2, 13, 7, 21, 19]);
+//     console.log(res);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// })();
+
+// * SNACK 6
+// Crea una variabile booleana (areThereAvailableBooks) per verificare se c’è almeno un libro disponibile.
+const areThereAvailableBooks = books.some((b) => b.available);
+
+// Crea un array (booksByPrice) con gli elementi di books ordinati in base al prezzo (crescente).
+// const booksByPrice = books.sort(
+//   (a, b) => parseInt(a.price) - parseInt(b.price)
+// );
+// console.log(booksByPrice);
+
+// Ordina l’array booksByPrice in base alla disponibilità (prima quelli disponibili), senza creare un nuovo array.
+books.sort((a, b) => b.available - a.available);
+console.log(books);
