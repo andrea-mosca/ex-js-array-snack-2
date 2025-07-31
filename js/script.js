@@ -134,16 +134,31 @@ const books = [
 //   }
 // })();
 
-// * SNACK 6
-// Crea una variabile booleana (areThereAvailableBooks) per verificare se c’è almeno un libro disponibile.
-const areThereAvailableBooks = books.some((b) => b.available);
+// // * SNACK 6
+// // Crea una variabile booleana (areThereAvailableBooks) per verificare se c’è almeno un libro disponibile.
+// const areThereAvailableBooks = books.some((b) => b.available);
 
-// Crea un array (booksByPrice) con gli elementi di books ordinati in base al prezzo (crescente).
-// const booksByPrice = books.sort(
-//   (a, b) => parseInt(a.price) - parseInt(b.price)
-// );
-// console.log(booksByPrice);
+// // Crea un array (booksByPrice) con gli elementi di books ordinati in base al prezzo (crescente).
+// // const booksByPrice = books.sort(
+// //   (a, b) => parseInt(a.price) - parseInt(b.price)
+// // );
+// // console.log(booksByPrice);
 
-// Ordina l’array booksByPrice in base alla disponibilità (prima quelli disponibili), senza creare un nuovo array.
-books.sort((a, b) => b.available - a.available);
-console.log(books);
+// // Ordina l’array booksByPrice in base alla disponibilità (prima quelli disponibili), senza creare un nuovo array.
+// books.sort((a, b) => b.available - a.available);
+// console.log(books);
+
+// *SNACK 7
+// Usa reduce per creare un oggetto (tagCounts) che conta quante volte ogni tag viene usato tra i libri.
+const tagCounts = books.reduce((acc, b) => {
+  b.tags.forEach((t) => {
+    if (acc[t]) {
+      acc[t]++;
+    } else {
+      acc[t] = 1;
+    }
+  });
+
+  return acc;
+}, {});
+console.log(tagCounts);
