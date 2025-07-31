@@ -88,18 +88,48 @@ const books = [
 
 // console.log(authors);
 
-// *SNACK 4
-//  Creare un array (ages) che contiene le età degli autori dei libri.
-const ages = books.reduce((acc, b) => {
-  return [...acc, b.author.age];
-}, []);
-console.log(ages);
+// // *SNACK 4
+// //  Creare un array (ages) che contiene le età degli autori dei libri.
+// const ages = books.reduce((acc, b) => {
+//   return [...acc, b.author.age];
+// }, []);
+// console.log(ages);
 
-//  Calcola la somma delle età (agesSum) usando reduce.
-const agesSum = ages.reduce((acc, a) => {
-  acc = acc + a;
-  return acc;
-}, 0);
+// //  Calcola la somma delle età (agesSum) usando reduce.
+// const agesSum = ages.reduce((acc, a) => {
+//   acc = acc + a;
+//   return acc;
+// }, 0);
 
-//  Stampa in console l’età media degli autori dei libri.
-console.log(agesSum / 4);
+// //  Stampa in console l’età media degli autori dei libri.
+// console.log(agesSum / 4);
+// * SNACK 5
+// Usando la l'API http://localhost:3333/books/{id}
+// usa la combinazione di .map() e Promise.all(),
+// per creare una funzione (getBooks) che a partire da un array di id
+// (ids), ritorna una promise che risolve un array di libri (books).
+//  Testala con l’array [2, 13, 7, 21, 19] .
+async function fetchJson(url) {
+  const response = await fetch(url);
+  const obj = await response.json();
+  return obj;
+}
+async function getBooks(ids) {
+  try {
+    const booksPromise = ids.map((id) => {
+      return fetchJson(`http://localhost:3333/books/${id}`);
+    });
+    const books = await Promise.all(booksPromise);
+    return books;
+  } catch (err) {
+    console.error(err);
+  }
+}
+(async () => {
+  try {
+    const res = await getBooks([2, 13, 7, 21, 19]);
+    console.log(res);
+  } catch (err) {
+    console.error(err);
+  }
+})();
