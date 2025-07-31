@@ -44,3 +44,11 @@ const books = [
     tags: ["html", "advanced", "junior", "mid-senior"],
   },
 ];
+// ** SNACK 1
+// Crea un array (longBooks) con i libri che hanno più di 300 pagine;
+const longBooks = books.filter((b) => b.pages > 300);
+console.log(longBooks);
+
+// Creare un array (longBooksTitles) che contiene solo i titoli dei libri contenuti in longBooks.
+const longBooksTitle = longBooks.map((l) => l.title);
+console.log(longBooksTitle);
