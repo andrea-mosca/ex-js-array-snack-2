@@ -53,21 +53,37 @@ const books = [
 // const longBooksTitle = longBooks.map((l) => l.title);
 // console.log(longBooksTitle);
 
-// * SNACK 2
-// Creare un array (availableBooks) che contiene tutti i libri disponibili.
-const availableBooks = books.filter((b) => b.available === true);
-console.log(availableBooks);
+// // * SNACK 2
+// // Creare un array (availableBooks) che contiene tutti i libri disponibili.
+// const availableBooks = books.filter((b) => b.available === true);
+// console.log(availableBooks);
 
-// Crea un array (discountedBooks) con gli availableBooks, ciascuno con il prezzo scontato del 20% (mantieni lo stesso formato e arrotonda al centesimo)
-const discountedBooks = availableBooks.map((a) => {
-  const discounted = parseInt(a.price) * 0.8;
-  a.price = `${discounted.toFixed(1)}€`;
-  return a;
-});
-console.log(discountedBooks);
+// // Crea un array (discountedBooks) con gli availableBooks, ciascuno con il prezzo scontato del 20% (mantieni lo stesso formato e arrotonda al centesimo)
+// const discountedBooks = availableBooks.map((a) => {
+//   const discounted = parseInt(a.price) * 0.8;
+//   a.price = `${discounted.toFixed(1)}€`;
+//   return a;
+// });
+// console.log(discountedBooks);
 
-// Salva in una variabile (fullPricedBook) il primo elemento di discountedBooks che ha un prezzo intero (senza centesimi).
-const fullPricedBook = discountedBooks.find((d) => {
-  return Number.isInteger(parseInt(d.price.replace("€", "")));
-});
-console.log(fullPricedBook);
+// // Salva in una variabile (fullPricedBook) il primo elemento di discountedBooks che ha un prezzo intero (senza centesimi).
+// const fullPricedBook = discountedBooks.find((d) => {
+//   return Number.isInteger(parseInt(d.price.replace("€", "")));
+// });
+// console.log(fullPricedBook);
+
+// * SNACK 3
+// Creare un array (authors) che contiene gli autori dei libri.
+const authors = books.reduce((acc, b) => [...acc, b.author], []);
+console.log(authors);
+
+// Crea una variabile booleana (areAuthorsAdults) per verificare se gli autori sono tutti maggiorenni.
+const areAuthorsAdults = authors.every((e) => e.age >= 18);
+console.log(`sono tutti maggiorenni?`, areAuthorsAdults);
+
+// Ordina l’array authors in base all’età, senza creare un nuovo array. (se areAuthorsAdult è true, ordina in ordine crescente, altrimenti in ordine decrescente)
+areAuthorsAdults
+  ? authors.sort((a, b) => a.age - b.age)
+  : authors.sort((a, b) => b.age - a.age);
+
+console.log(authors);
